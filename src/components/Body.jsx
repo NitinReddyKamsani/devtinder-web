@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import NavBar from './NavBar'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import Footer from './Footer'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
@@ -11,22 +11,31 @@ import { addUser } from '../utils/userSlice'
 const Body = () => {
 
 const dispatch = useDispatch();
+const navigate = useNavigate();
 
-const fetchUser = async ()=>{
-    try{
-      const res = axios.get(Base_Url + "profile/view",{
-        withCredentials : true
-      });
-      dispatch(addUser(res))
-    }
-    catch(err){
-      console.log(err)
-    }
-}
+const fetchUser = async () => {
+  try {
+    const res = await axios.get(Base_Url + "profile/view", {
+      withCredentials: true
+    });
 
-useEffect(()=>{
+    // If server says user is not logged in, redirect
+    if (res.status !== 200 || !res.data) {
+      navigate("/login");
+      return;
+    }
+
+    dispatch(addUser(res.data));
+  } catch (err) {
+    // Network error or 4xx/5xx response
+    navigate("/login");
+    console.log(err);
+  }
+};
+
+useEffect(() => {
   fetchUser();
-},[])
+}, []);
 
 
   return (
