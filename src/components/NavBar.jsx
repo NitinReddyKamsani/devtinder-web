@@ -12,7 +12,7 @@ const NavBar = () => {
     </div>
   
     {/* Right side - Search + Avatar */}
-    { user &&
+    { user?.data?.firstName &&
     <div className="navbar-end flex items-center gap-2">
       <div className="form-control">
       </div>
