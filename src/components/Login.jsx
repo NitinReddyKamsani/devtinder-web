@@ -9,6 +9,8 @@ const Login = () => {
   const[email,setEmail] = useState('Manjula@yahoo.com')
   const[password,setPassword] = useState('Manjula@123')
   const navigate = useNavigate();
+  const [hasError,sethasError] = useState(false);
+  const [error,setError] = useState(null);
 
   const handleBtn = async () => {
     try {
@@ -22,6 +24,8 @@ const Login = () => {
     navigate('/');
      
     } catch (err) {
+      sethasError(true);
+      setError(err.response?.data?.message  || "Invalid Email or Password");
       console.log(err);
     }
   };
@@ -37,6 +41,9 @@ const Login = () => {
       <legend className="fieldset-legend">What is your password?</legend>
       <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} className='input' placeholder='Type here' />
       </fieldset>
+      { hasError &&
+      <p className='text-red-500 text-center'>Error : {error}</p> 
+      }
       <div className="card-actions justify-center my-2">
         <button className="btn btn-primary items-center" onClick={handleBtn}>Login</button>
       </div>
