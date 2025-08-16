@@ -22,15 +22,16 @@ const Feed = () => {
   
 
   useEffect(() => {
-    console.log("useEffect in Feed component ran");
     getFeed();
   }, []);
 
+
   return (
-    <div className='flex justify-center my-10'>
-      <UserCard />
+    <div className='flex justify-center my-4'>
+      {feed?.users ? <UserCard users={feed.users[0]} /> : <p>Loading...</p>}
     </div>
   );
+  
 };
 
 export default Feed;

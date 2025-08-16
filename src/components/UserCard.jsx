@@ -1,18 +1,21 @@
 import React from 'react'
 
-const UserCard = () => {
+const UserCard = ({users}) => {
   return (
-    <div className="card bg-base-300 w-96 shadow-sm">
+    <div className="card bg-base-300 w-80 shadow-sm my-2">
   <figure>
-    <img
-      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+    <img className=' w-fit h-fit rounded-md'
+      src={users.photo}
       alt="Shoes" />
   </figure>
   <div className="card-body">
-    <h2 className="card-title">Card Title</h2>
-    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-    <div className="card-actions justify-end">
-      <button className="btn btn-primary">Buy Now</button>
+    <h2 className="card-title my-1">{users.firstName + " " + users.lastName}</h2>
+    <p>{users.about}</p>
+    <p>Age : {users.age + " , " + "Gender : " +  users.gender}</p>
+    <p>Skills : {users.skills.join(", ")}</p>
+    <div className="card-actions justify-center gap-8">
+      <button className="btn btn-primary">Ignore</button>
+      <button className="btn btn-secondary">Interested</button>
     </div>
   </div>
 </div>

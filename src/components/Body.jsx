@@ -30,7 +30,7 @@ const fetchUser = async () => {
   } catch (err) {
     // Network error or 4xx/5xx response 
     navigate("/login");
-    console.log(err);
+  
   }
 };
 
