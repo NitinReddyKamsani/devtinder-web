@@ -4,7 +4,7 @@ const UserCard = ({users}) => {
   return (
     <div className="card bg-base-300 w-80 shadow-sm my-2">
   <figure>
-    <img className=' w-fit h-fit rounded-md'
+    <img className=' w-full h-72 rounded-md'
       src={users.photo}
       alt="Shoes" />
   </figure>

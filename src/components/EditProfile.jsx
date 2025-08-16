@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import UserCard from './UserCard'
+import { Base_Url } from '../constants/constants'
+import axios from 'axios'
 
-const EditProfile = ({user}) => {
+const EditProfile = ({ user }) => {
     const[firstName, setFirstName] = useState(user?.data?.firstName)
     const[lastName,setLastName] = useState(user?.data?.lastName)
     const[age,SetAge] = useState(user?.data?.age);
@@ -9,6 +11,28 @@ const EditProfile = ({user}) => {
     const[about,SetAbout] = useState(user?.data?.about);
     const[skills,SetSkills] = useState(user?.data?.skills);
     const[photo,SetPhoto] = useState(user?.data?.photo);
+
+    const handleUpdate = async () =>{
+        try {
+          const res = await axios.patch(Base_Url + "profile/update",{
+                firstName,
+                lastName,
+                age,
+                gender,
+                about,
+                skills,
+                photo
+            },
+            {
+                withCredentials : true
+            })
+            alert(res.data);
+
+        }
+        catch(err){
+            alert("Update Failed Please Try Again Later")
+        }
+    }
 
   return (
     <div className='flex justify-center gap-4'>
