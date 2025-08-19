@@ -2,13 +2,24 @@ import axios from 'axios'
 import React, { useEffect } from 'react'
 import { Base_Url } from '../constants/constants'
 import { useDispatch, useSelector } from 'react-redux'
-import { addRequests } from '../utils/requestSlice'
-import ConnectionCard from './ConnectionCard'
+import { addRequests, removeRequest } from '../utils/requestSlice'
 import RequestCard from './RequestCard'
 
 const Requests = () => {
     const dispatch = useDispatch();
     const req = useSelector(store=> store.requests);
+
+
+    const reviewRequests = async (status,_id)=> {
+        try {
+            const res = await axios.post(Base_Url + "request/review/" + status + "/" + _id ,{} , {withCredentials : true});
+            console.log(res);
+            dispatch(removeRequest(_id));
+        }
+        catch(err){
+            alert(err);
+        }
+    }
 
     const fetchRequests = async ()=> {
         try{
@@ -20,7 +31,7 @@ const Requests = () => {
         }
     }
 
-
+   
     useEffect(()=>{
         fetchRequests();
     },[])
@@ -28,7 +39,12 @@ const Requests = () => {
 
     if(!req) return ;
     if(req.length === 0){
-        <div className='text-lg my-10'>There are no requests !! Connect with someone from the feed</div>
+       return( 
+        <div>
+            <h1 className='text-lg my-10 text-center'>Connection Requests</h1>
+       <h1 className='text-lg my-10 text-center'>There are no requests !! You can see if someone send the requests</h1>
+       </div>
+       )
     }
     
   return (
@@ -40,7 +56,8 @@ const Requests = () => {
           <div key={request._id || index} className="flex">
             <RequestCard
               user={request.fromConnectionId} // full user info (includes skills)
-              status={request.status} // request metadata
+              requestId = {request._id}
+              reviewRequests={reviewRequests}
             />
           </div>
         ))}
@@ -49,4 +66,4 @@ const Requests = () => {
   )
 }
 
-export default Requests
+export default Requests;

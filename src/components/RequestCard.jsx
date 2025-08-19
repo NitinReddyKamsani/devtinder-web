@@ -1,7 +1,9 @@
 import React from "react";
 
-const RequestCard = ({ user, status }) => {
+const RequestCard = ({ user,requestId,reviewRequests}) => {
   if (!user) return null; // safeguard
+
+  console.log(requestId);
 
   return (
     <div className="card bg-base-300 w-80 shadow-sm my-2">
@@ -22,8 +24,8 @@ const RequestCard = ({ user, status }) => {
         </p>
         <p>Skills: {user.skills?.join(", ") || "No skills listed"}</p>
         <div className="card-actions justify-center gap-8">
-      <button className="btn btn-primary">Reject</button>
-      <button className="btn btn-secondary">Accept</button>
+      <button className="btn btn-primary" onClick={()=>reviewRequests("rejected",requestId)}>Reject</button>
+      <button className="btn btn-secondary" onClick={()=>reviewRequests("accepted",requestId)}>Accept</button>
        </div>
      
       </div>
