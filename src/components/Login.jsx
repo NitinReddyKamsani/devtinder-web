@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch()
-  const[email,setEmail] = useState('Manjula@yahoo.com')
-  const[password,setPassword] = useState('Manjula@123')
+  const[email,setEmail] = useState('Nitin@yahoo.com')
+  const[password,setPassword] = useState('Nitin@123')
   const navigate = useNavigate();
   const [hasError,sethasError] = useState(false);
   const [error,setError] = useState(null);

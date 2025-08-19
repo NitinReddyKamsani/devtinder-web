@@ -12,11 +12,10 @@ const Connections = () => {
     const fetchConnections = async ()=>{
         try{
             const res = await axios.get(Base_Url + "user/connections",{withCredentials : true});
-            console.log(res?.data?.otherUsers);
             dispatch(addConnection(res?.data?.otherUsers));
         }
         catch(err){
-            console.log(err);
+           alert(err.message);
         }
     }
 
