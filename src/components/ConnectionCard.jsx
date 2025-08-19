@@ -12,7 +12,7 @@ const ConnectionCard = ({users}) => {
     <h2 className="card-title my-1">{users.firstName + " " + users.lastName}</h2>
     <p>{users.about}</p>
     <p>Age : {users.age + " , " + "Gender : " +  users.gender}</p>
-    <p>Skills : {users.skills.join(", ")}</p>
+    <p>Skills : {users?.skills.join(", ") || "No Skills listed"}</p>
   </div>
 </div>
   )

@@ -29,7 +29,8 @@ const Connections = () => {
   return (
     <>
     <h1 className='text-2xl my-5 text-center'>Connections</h1>
-    <div className='flex gap-3 mx-2 overflow-y-auto'>
+    <div className='flex flex-wrap justify-center gap-4 my-4 
+                 max-h-[80vh] overflow-y-auto p-4'>
         
         {
             connections.map((connect,index)=> <div key={index} className='flex'><ConnectionCard users={connect}/></div>)
