@@ -20,9 +20,12 @@ const UserCard = ({users}) => {
   return (
     <div className="card bg-base-300 w-80 shadow-sm my-2">
   <figure>
-    <img className=' w-full h-72 rounded-md'
-      src={users.photo}
-      alt="User Photo" />
+  <img className=' w-full h-72 rounded-md'
+  src={users.photo || "https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/fd35c-no-user-image-icon-27.png?fit=500%2C500&ssl=1"}
+  alt="user"
+  onError={(e) => e.target.src = "https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/fd35c-no-user-image-icon-27.png?fit=500%2C500&ssl=1"}
+/>
+
   </figure>
   <div className="card-body">
     <h2 className="card-title my-1">{users.firstName + " " + users.lastName}</h2>
