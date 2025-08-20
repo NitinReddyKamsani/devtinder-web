@@ -23,19 +23,18 @@ const Feed = () => {
     getFeed();
   }, []);
 
+  // Don’t access feed.users[0] before it exists
+  if (!feed?.users) {
+    return <div className="text-center my-10">Loading...</div>;
+  }
+
+  if(feed.users.length === 0){
+    return <div className="text-center my-10">There are no profiles right now</div>
+  }
   return (
-    <div 
-      className="flex flex-wrap justify-center gap-4 my-4 
-                 max-h-[80vh] overflow-y-auto p-4"
-    >
-      {feed?.users?.length > 0 ? (
-        feed.users.map((user, index) => (
-          <UserCard key={user._id || index} users={user} />
-        ))
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div>
+    <div className='flex justify-center my-10'>
+      <UserCard users={feed.users[0]} />
+    </div> 
   );
 };
 
