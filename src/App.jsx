@@ -7,25 +7,26 @@ import Feed from "./components/Feed"
 import Profile from "./components/Profile"
 import Connections from "./components/Connections"
 import Requests from "./components/Requests"
+import MobileWarning from "./components/MobileWarning"   // ⬅️ Import warning
 
 function App() {
-
   return (
-    <>
     <Provider store={appStore}>
-    <BrowserRouter basename="/">
-      <Routes>
+      <BrowserRouter basename="/">
+        {/* Show warning on all pages */}
+        <MobileWarning />  
+
+        <Routes>
           <Route path="/" element={<Body />}>
-          <Route path="/" element={<Feed />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/connections" element={<Connections />} />
-          <Route path="/requests" element={<Requests />} />
-          </Route>  
-      </Routes>
-    </BrowserRouter>
+            <Route path="/" element={<Feed />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/connections" element={<Connections />} />
+            <Route path="/requests" element={<Requests />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </Provider>
-    </>
   )
 }
 

@@ -8,7 +8,7 @@ import UserCard from './UserCard';
 const Feed = () => {
   const feed = useSelector(store => store.feed);
   const dispatch = useDispatch();
-
+  
   const getFeed = async () => {
     if (feed?.users?.length > 0) return;
     try {

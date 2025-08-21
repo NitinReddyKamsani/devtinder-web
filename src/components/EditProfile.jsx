@@ -56,7 +56,7 @@ const EditProfile = ({ user }) => {
       <div className="flex justify-center gap-4">
         <div className="flex justify-center my-2">
           <div className="card bg-base-300 w-96 shadow-sm">
-            <div className="card-body max-h-[600px] overflow-y-auto">
+            <div className="card-body max-h-[600px] overflow-y-auto overflow-x-auto">
               <h2 className="card-title justify-center">Edit Profile</h2>
 
               <fieldset className="fieldset">
