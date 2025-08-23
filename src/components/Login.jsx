@@ -18,15 +18,17 @@ const Login = () => {
 
   const handleBtn = async () => {
     try {
-      const res = await axios.post("http://localhost:7777/login",{
+      const res = await axios.post(
+        "/api/login",
+        {
           email,
-          password
-      },
-      {withCredentials : true}
-  )
-    dispatch(addUser(res))
-    navigate('/');
-     
+          password,
+        },
+        { withCredentials: true }
+      );
+    
+      dispatch(addUser(res));
+      navigate('/');
     } catch (err) {
       sethasError(true);
       setError(err.response?.data?.message  || "Invalid Email or Password");
