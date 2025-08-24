@@ -30,3 +30,30 @@ If you are developing a production application, we recommend using TypeScript wi
 -> copy code (build files) to /var/www/html
 -> command : sudo scp -r dist/* /var/www/html/ 
 -> Enable PORT 80 on aws instance
+
+## Backend
+-> Allowed the Aws instance IP on MOngodb for access
+-> Installed npm 
+-> Started the server
+-> Installed Pm2 : npm install pm2 -g
+-> Start the server using Pm2 : pm2 start npm -- start
+-> To show the logs : pm2 logs
+-> pm2 list , pm2 flush <name> , pm2 delete <name> , pm2 stop <name>
+-> custom name : pm2 start npm --name "devtinder-backend" --  start
+
+* nginx config
+
+config nginx path : etc/nginx/sites-available/default
+
+server name : aws instance api
+
+    location /api/ {
+        proxy_pass http://localhost:7777/;  
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+-> restart nginx - sudo systemctl restart nginx
