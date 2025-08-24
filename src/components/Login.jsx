@@ -19,7 +19,7 @@ const Login = () => {
   const handleBtn = async () => {
     try {
       const res = await axios.post(
-        "/api/login",
+        Base_Url + "login",
         {
           email,
           password,
