@@ -8,14 +8,21 @@ const Chat = () => {
   const {targetUserId} = useParams();
   const [messages,setMessages] = useState([{text : "Hello world"}])
   const user = useSelector(store => store.user);
-  const userId = user._id;
+  //console.log(user.data.firstName);
+  const userId = user?.data?._id
+  const userName = user?.data?.firstName;
 
+  //console.log(targetUserId);
 
   useEffect(()=>{
-
+    if (!userId) return; 
     const socket = createSocketConnection();
-    socket.emit("join",{userId,targetUserId})
+    socket.emit("joinChat",{userId,targetUserId})
+    //console.log(userId,targetUserId)
 
+    return ()=>{
+      socket.disconnect();
+    }
   },[])
 
 
