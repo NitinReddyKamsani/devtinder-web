@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { createSocketConnection } from '../utils/socket';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { Base_Url } from '../constants/constants';
 
 const Chat = () => {
 
@@ -14,6 +16,22 @@ const Chat = () => {
   const userName = user?.data?.firstName;
 
   //console.log(targetUserId);
+
+  const fetchChat = async ()=> {
+    const chat = await axios.get(Base_Url + "chat/" + targetUserId , {withCredentials : true} );
+   // console.log(chat.data.messages);
+    const chatMessages = chat?.data?.messages.map((msg)=> {
+      return {
+        userName : msg.senderId.firstName + " " + msg.senderId.lastName,
+        text : msg.text
+      }
+    })
+    setMessages(chatMessages);
+  }
+
+  useEffect(()=>{
+    fetchChat()
+  },[])
 
   useEffect(()=>{
     if (!userId) return; 
@@ -48,10 +66,8 @@ const Chat = () => {
               <div key={index} className="chat chat-start">
                 <div className="chat-header">
                  {msg.userName}
-               <time className="text-xs opacity-50">2 hours ago</time>
                 </div>
               <div className="chat-bubble">{msg.text}</div>
-              <div className="chat-footer opacity-50">Seen</div>
               </div>
           )
         })} 
