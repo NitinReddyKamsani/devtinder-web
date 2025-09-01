@@ -22,7 +22,7 @@ const Chat = () => {
    // console.log(chat.data.messages);
     const chatMessages = chat?.data?.messages.map((msg)=> {
       return {
-        userName : msg.senderId.firstName + " " + msg.senderId.lastName,
+        userName : msg?.senderId?.firstName + " " + msg?.senderId?.lastName,
         text : msg.text
       }
     })
