@@ -11,6 +11,9 @@ const Chat = () => {
   const [messages,setMessages] = useState([])
   const [newMessage, setNewMessage] = useState("");
   const user = useSelector(store => store.user);
+  console.log(user);
+  //console.log(user?.data?.firstName + " " + user?.data?.lastName);
+  const fullName = user?.data?.firstName + " " + user?.data?.lastName;
   //console.log(user.data.firstName);
   const userId = user?.data?._id
   const userName = user?.data?.firstName;
@@ -22,7 +25,8 @@ const Chat = () => {
    // console.log(chat.data.messages);
     const chatMessages = chat?.data?.messages.map((msg)=> {
       return {
-        userName : msg?.senderId?.firstName + " " + msg?.senderId?.lastName,
+        userName: msg?.senderId?.lastName ? `${msg?.senderId?.firstName} ${msg?.senderId?.lastName}` : msg?.senderId?.firstName,
+
         text : msg.text
       }
     })
@@ -61,9 +65,9 @@ const Chat = () => {
       <div className='flex-1 overflow-scroll p-5 border border-gray-600'>
       {
         messages.map((msg,index)=>{
+          console.log(msg.userName)
           return (
-
-              <div key={index} className="chat chat-start">
+              <div key={index} className= {"chat " + (fullName === msg.userName ? "chat-end" : "chat-start")}>
                 <div className="chat-header">
                  {msg.userName}
                 </div>
